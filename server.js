@@ -1,11 +1,12 @@
 var http = require("http")
+var url = require("url")
 
-function start() {
+function start(route, handle) {
   http.createServer(function(req, res) {
-    console.log("请求已接受");
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.write('hello world')
-    res.end()
+    var pathname = url.parse(req.url).pathname
+    console.log("");
+    console.log("对" + pathname + "的请求已接受");
+    route(handle, pathname,res)
   }).listen(3000)
   console.log("Server on http://localhost:3000");
 }
