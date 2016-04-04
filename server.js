@@ -6,7 +6,7 @@ function start(route, handle) {
     var pathname = url.parse(req.url).pathname
     console.log("");
     console.log("对" + pathname + "的请求已接受");
-    route(handle, pathname,res)
+    route(handle, pathname, res, req)
   }).listen(3000)
   console.log("Server on http://localhost:3000");
 }
