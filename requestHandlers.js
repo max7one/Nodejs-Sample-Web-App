@@ -12,14 +12,14 @@ function start(res) {
     'charset=UTF-8" />' +
     '</head>' +
     '<body>' +
-    '<form action="/upload" method="post">' +
-    '<textarea name="text" rows="20" cols="60"></textarea>' +
+    '<form action="/upload" enctype="multipart/form-data" ' +
+    'method="post">' +
+    '<input type="file" name="upload" multiple="multiple">' +
     '<br><br>' +
-    '<input type="submit" value="提交" />' +
+    '<input type="submit" value="上传文件" />' +
     '</form>' +
     '</body>' +
     '</html>';
-
   res.writeHead(200, { "Content-Type": "text/html" });
   res.write(body);
   res.end();
@@ -31,16 +31,19 @@ function upload(res, req) {
   console.log("正在解析");
   form.parse(req, function(error, fields, files) {
     console.log("解析完成");
-    // var extName = /\.[^\.]+/.exex(files.file.name)
-    // var ext = Array.isArray(extName) ? extName[0] : '';
-    // //重命名,防止文件重复
-    // var avatarName = uuid() + ext;
-    // //移动的文件目录
-    // var newPath = 'upload/img/' + avatarName;
-    // fs.renameSync(files.file.path, newPath);
-    // fields.newsimg = 'img/' + avatarName
-    res.writeHead(200, { "Content-Type": "text/html" });
-    res.write("接受图片:<br/>");
+    console.log(files.upload.name);
+    //正则匹配
+    var extName = /\.[^\.]+/.exec(files.upload.name)
+    console.log(extName);
+    var ext = Array.isArray(extName) ? extName[0] : '';
+    //重命名,防止文件重复
+    var avatarName = uuid() + ext;
+    //移动的文件目录
+    var newPath = './upload/' + avatarName;
+    fs.renameSync(files.upload.path, newPath);
+    fields.newsimg = 'img/' + avatarName
+    res.writeHead(200, { "Content-Type": "text/html"});
+    res.write("received:<br/>");
     res.write("<img src='/show' />");
     res.end();
   });
