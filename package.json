@@ -1,0 +1,25 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "File Upload",
+  "main": "requestHandlers.js",
+  "dependencies": {
+    "node-uuid": "^1.4.7",
+    "formidable": "^1.0.17"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/max7one/Nodejs-Sample-Web-App.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/max7one/Nodejs-Sample-Web-App/issues"
+  },
+  "homepage": "https://github.com/max7one/Nodejs-Sample-Web-App#readme"
+}
